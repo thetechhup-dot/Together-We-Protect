@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<title>تقييم الفعالية</title>
+<link rel="preload" href="fonts/UniversArabicForHSBC-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/UniversArabicForHSBC-Bold.ttf" as="font" type="font/ttf" crossorigin>
+<style>
+  /* خط الهوية — Univers: عائلة واحدة "Univers SAB" تختار الحروف العربية أو اللاتينية تلقائياً */
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Light.ttf") format("truetype");
+    font-weight: 300; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Regular.ttf") format("truetype");
+    font-weight: 400 500; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Bold.ttf") format("truetype");
+    font-weight: 600 800; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Light.otf") format("opentype");
+    font-weight: 300; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Regular.otf") format("opentype");
+    font-weight: 400; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Medium.otf") format("opentype");
+    font-weight: 500 600; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
+  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Bold.otf") format("opentype");
+    font-weight: 700 800; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
+
+  :root {
+    --red: #E2231A;
+    --red-dark: #B81B14;
+    --red-tint: #FDECEB;
+    --black: #141414;
+    --gray-700: #4A4A4A;
+    --gray-500: #8A8A8A;
+    --gray-300: #D9D9D9;
+    --gray-100: #F4F4F4;
+    --white: #FFFFFF;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: "Univers SAB", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Header ---------- */
+  .hero {
+    position: relative;
+    padding: 40px 20px 36px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .deco { position: absolute; pointer-events: none; }
+  .deco-pill  { top: -70px; left: -40px; width: 120px; }
+  .deco-rings { top: 18px; right: -34px; width: 96px; }
+  .deco-small { top: 120px; left: 18px; width: 34px; }
+  .logo {
+    position: relative;
+    display: block;
+    width: 190px;
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto 36px;
+  }
+  .hero h1 {
+    position: relative;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .hero h1 .accent { color: var(--red); }
+  .hero p {
+    position: relative;
+    color: var(--gray-700);
+    font-size: 1rem;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Language toggle ---------- */
+  .lang-toggle {
+    position: absolute;
+    top: 16px;
+    inset-inline-end: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    color: var(--black);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .15s, color .15s;
+  }
+  .lang-toggle:hover { border-color: var(--red); color: var(--red); }
+  .lang-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+  .lang-toggle svg { flex: none; }
+  .hero { padding-top: 64px; }
+
+  /* ---------- Form ---------- */
+  main { max-width: 520px; margin: 0 auto; padding: 0 20px 48px; }
+  .divider { height: 1px; background: var(--gray-300); margin: 0 0 32px; }
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    margin-bottom: 14px;
+  }
+
+  .fields { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+  @media (min-width: 420px) { .fields { grid-template-columns: 1.4fr 1fr; } }
+
+  .field label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+  }
+  .field label small { color: var(--gray-500); font-weight: 400; }
+
+  input[type="text"], textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem; /* 16px avoids iOS zoom */
+    color: var(--black);
+    background: var(--gray-100);
+    border: 1.5px solid transparent;
+    border-radius: var(--radius);
+    padding: 13px 14px;
+    transition: border-color .15s, background .15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]::placeholder, textarea::placeholder { color: var(--gray-500); }
+  input[type="text"]:focus, textarea:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--black);
+  }
+  textarea { resize: vertical; min-height: 112px; }
+
+  .question { margin-bottom: 32px; }
+  .question legend {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .question legend .num {
+    flex: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--red);
+  }
+  fieldset { border: 0; }
+
+  .scale {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .scale input { position: absolute; opacity: 0; pointer-events: none; }
+  .scale label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    border-radius: 12px;
+    border: 1.5px solid var(--gray-300);
+    background: var(--white);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+  }
+  .scale label:active { transform: scale(.95); }
+  .scale input:focus-visible + label { outline: 2px solid var(--black); outline-offset: 2px; }
+  .scale input:checked + label {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+  .scale-hints {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+  .question.invalid .scale label { border-color: var(--red); }
+  .error-msg {
+    display: none;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--red);
+    font-weight: 500;
+  }
+  .question.invalid .error-msg { display: block; }
+
+  .comment { margin: 8px 0 32px; }
+
+  .submit {
+    width: 100%;
+    height: 56px;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--red);
+    color: var(--white);
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .submit:hover { background: var(--red-dark); }
+  .submit:active { transform: scale(.98); }
+  .submit:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+  .submit[disabled] { background: var(--gray-500); cursor: default; }
+
+  .privacy {
+    text-align: center;
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--gray-500);
+  }
+
+  /* ---------- Success ---------- */
+  .success {
+    display: none;
+    text-align: center;
+    padding: 24px 20px 64px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .success .check {
+    width: 76px; height: 76px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--red-tint);
+    display: grid; place-items: center;
+  }
+  .success h2 { font-size: 1.5rem; margin-bottom: 8px; }
+  .success p { color: var(--gray-700); }
+  body.done main { display: none; }
+  body.done .success { display: block; animation: rise .4s ease both; }
+  body.done .hero h1, body.done .hero p { display: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.cx-footer {
+  padding: 22px 20px 28px;
+  text-align: center;
+}
+
+.cx-footer-content {
+  display: inline-block;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1.15;
+}
+
+.cx-footer-ar {
+  font-family: inherit;
+  font-size: 1.45rem;
+  font-weight: 400;
+  color: #231F20;
+  text-align: left;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.cx-footer-en {
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--red);
+  text-align: left;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .cx-footer-ar {
+    font-size: 1.15rem;
+  }
+
+  .cx-footer-en {
+    font-size: 1rem;
+  }
+}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <!-- عناصر زخرفية مستوحاة من الهوية (أحمر ورمادي فقط) -->
+  <svg class="deco deco-pill" viewBox="0 0 120 220" fill="none" aria-hidden="true">
+    <g stroke="#E2231A" stroke-width="2" opacity=".9">
+      <rect x="2"  y="2"  width="116" height="216" rx="58"/>
+      <rect x="10" y="10" width="100" height="200" rx="50"/>
+      <rect x="18" y="18" width="84"  height="184" rx="42"/>
+      <rect x="26" y="26" width="68"  height="168" rx="34"/>
+    </g>
+  </svg>
+  <svg class="deco deco-rings" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <g stroke="#8A8A8A" stroke-width="1">
+      <circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="40"/>
+      <circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="24"/>
+      <circle cx="50" cy="50" r="16"/><circle cx="50" cy="50" r="8"/>
+    </g>
+  </svg>
+  <svg class="deco deco-small" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <g stroke="#E2231A" stroke-width="1">
+      <circle cx="20" cy="20" r="19"/><circle cx="20" cy="20" r="14"/>
+      <circle cx="20" cy="20" r="9"/><circle cx="20" cy="20" r="4"/>
+    </g>
+  </svg>
+
+  <button type="button" class="lang-toggle" id="langToggle" lang="en" aria-label="Switch to English">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5S14.6 18.7 12 21.5M12 2.5C9.4 5.3 8.1 8.5 8.1 12s1.3 6.7 3.9 9.5"/></svg>
+    <span>English</span>
+  </button>
+
+  <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAAvCAYAAACMqXQLAAAACXBIWXMAABYlAAAWJQFJUiTwAAAN0ElEQVR4nO1dMXbjOBL93W/z0SQks6EVOFCymhMMfYJWn6DlE9g6gawT2D6B5RNYfYJmn6DViQIFak5GMtKeYDZAQQJBAARIUPLb1X9PzyYJAiCJQn0UCoUPuOCCHhEG0RjAgA6zosyzM1bn3eBDXxlvh6MxgG84vnQXzK53mychr18AYk9VM2F5vdvcutwQBlEC4AuACerPugbwFcBTUeZ7xb3fpFOzoszXhrIq6Ysyv9GkmwL4BCCxqVMYRI8AxrpyG7AuynwmlZ8AuAN7JzL2AFYAFjohpPp/UV3TPbNw7xjAo+Zy5f0q3n8TXosyXzbVUUIG4DuAldgG/uVYsBU6Cl0GYCmdu6X8+sQewKwxlQBqsPeGJGP63YVBdKMQqkQ6bnpfcnq5PgOw92QSIl6nT1SnPR0b87YBlf8IYGpINqDr0zCIFkWZPyjSxLr6hEE0Kcp8Zcj/i+5e1N+vLp0O34X/Y4f7pwAewyCaccH96FhwIzoKHcC0XUU7XO82KYC0W80asZDLNSEMoheYhU7EAMA36o37hEro9mDvTn62MYA3z+W/wSx0MuZhED04lvFXw3WVln0PGAB4CYNoAnjWeB6ELr3ebXS92S2AXy3zbUImUtsmUGOZSqfXABb0NwbrecU0AwBzAJ/bV9NYpynqQjcryvxJSPMi1SmhzuAV1d6cYy4dLwH8LZ3LKO8H1DXAiurA00zANGIslhEGUVqUeaooX4UJNMyEniVWXbPEDOz76ZAZrq1RrdcAjO5PpXSPAFbeBM+D0AEGqne922Tb4WiBemPwAetxHdGpO+n0GsCNwOEzAGkYRED1xffZG/9bOl6JQkeYod4QBpz+yAiDSH7XryoB0byTVVHmlU6mKPNVGEQpgB+oCsgdzIxmheO7i8MgGmvGwonwf0a/RJFOh7VDByBjr7h3FQbRT1THnDHgiWp6Errl9W5j6m0A4Al1ytQVKVFZW0xRf86ZyngCpklOBVnb1b4F1fEWTDPznw+oDEvKzozqIJc7IeHV4at0rDNqiOdN48CTQdH5AfBANT0JnZVh43q32W+HoxmAlw5lyXCyYqI+xtD2knS+N8uxhO+o9u5JGERvEKge1WnZQ9nyO1lpOqJDHcgwJbaZBHphycBYBe9canQzDKIY1c7nFe0ttd5AFl4RGdBR43kSOgB4tjVsXO82S5h5uAsW17tN5niP/DHl3vhcSBXnJgB+hUH0Iwyie2qcfUDO96fFPfI3bBISkT3ECkOVSOMz07SMAeMwiBLdzzUzYUwrYgZ00HgehS673m0eHO+Zofv0wh6Muroilo6zjvXwgqLM0zCInqC2tPIphMcwiNZgjXhp0kqOkIUgtbhnDbfx1wrVRvwFVeH1QTN1838cJvaShEH0j+H6Hox9rICWGs+j0AHuVI9PL3Tl8LVpi5bIPOThBTSR/RnmOvEJ5l/ctO0BbdrBf1wSE10WBe1QdxofyjTzPWEP5jCw5CecBc+z0LkaNkTM0N7QsibK+j+HosxXRZlfgQngEvp3NADw1oZCKdDmO/zR4h4d3fRBMwEm2Knh1xYDMLZxYGlOgudZ6IAW2o6DxmbPLW938lCRIDeypENe1nAdn5EA3hZl/juAP8FodaZIKk8DtIHc0BOLe+IW5cgsh9PLT4Y0LpgVZX6j+zXcmxZl/oH/APyOejvj86b2gteD0D21MGzU8oA71Vt10LJAvZHJ82d9ITZdNBkCijLn/pR/wt2oYYNMOrZ5J4l03KiliG6mwik+DSFqvHdBM4sy39NUgvxcE8BS8HoQOtVcjjNojOaSj9W0RQNkD4+JThuREPwj/RJD3qZrsoBk0vE38acqh4wpshU2NpRpC+t3Ahy8bGSklmVV6CaqDhVdaGZfSKXj3wALwetB6ABHv0gTaKyWWiZ/9qBll4pzOmtYjcZJc3416qSaSNZ4hqTSsS0Flufc5HzaYKUoX/lONKsHXCys8ju7N1x7D5CNSGOgYTqhJ6Fbu/hFWmIG5oZkQoZ20wcVFGWehUG0hOQKRgPnZyqHC4psNVxKx1+lNDGYtlqAjRn2ZHmco66Z5PHtSqrTnFzWllTnMeWTKOrQCVTPZ1S1zyQMoh9gjCQFqz8XOrE9ObEWKmsFtftd2zE/x5jemQ77FhpV2aFoBa8noQO6U70arneb9XY4WsLsGe9Ny4I9A58b40hgpoo1mkseHPIyljFo1YChETwpGsACddetOY4CqMJa59LkiqLMH8Ig+gPVb3B4FgMqnjWWkDssgD2Laz4ymubxUgBNRhYZSsOTkmr2KHRdDRsmmKYXUp/TB0SLbmBP09aoOlGL+OyQD8CErtZ5UaO7gb1pfwX3RmREUea3sGcVe7B3smxRlIpSvgujigKZfCIMonFN4/UodEAP2o6D/DhlusPhyxn4AC58wgr0BFU6uAcTqK+mxqXIR9ZaAK12gGZ1gJDXOgyiKzCt8wlM44h5relnzEeAnKZRqIsynwm0M0GdIqdgGss0rsuksivpiG4+oco4VMIoaxu5vBRuEPPLpPuVFJRo/grV7zCuuMD0LHSLFq5hzlCEiXAO53DBBX3jQDV7FroMHgwblhC1qo/pgwsu8I6PQO9CB/g1bBhBK9hTOrRe9XDBBafEhxMIXXq923gdxDdhOxzFAL5d7zZXpyz3ggts4T3Y0TtCdu4KXHCBDh8p3IKLGdoVyXY4SnrKW4c5lTs9cbkXXGCFg1Wzb+PKqWgfCTlffrEHcHUZ513w3nCgmj1rvng7HD30kK8KovfBAPaxLy+44GSoLWXvUfP1rn2IWqoCIV15cI6+4P8Mwsr2Nj6aRihjSPQofL1NZm+HowFYwFtVnb1aVh33GpiRR8mbUDfjHglUhpj+s7DPgSnWTAYWaGil8lt02StAXPhpsU9AU7niigR5/wLVaoU29drLcTwV9eDf7VXnTUTCNoc6jOMKwLMmtqhLm3hVOkmT0/EN/AvfdDscPVvEz2yDe+jrmmyHo8Sjn+gY9ivPeZ1ecXQYfgFblKoERWXmTsByzE6bch/DILpVNC6be1WIHcpV+ZIOhPvlbyRe61SvMIgeNHsxcPDvpoqazTsBU5ufgK26WJJfqipvG3zXrk7oUfge4dk5l+btmiJMvwDwbeBZo9kzZg0coig/gXUQY10jEZbvAGxpkM7jZ4mqY/AAbK3dFMc4/ZnGJ1O+1wXyt5PLvQ+D6GdL5+emEOpNuCPBdx7OKIRuAVpSRdcnYG1oALbhynfNM9q0icy4Hq8n4Uu2w9HEsEdCG9gEuI23w9G957WAqrDdJizAesUx2HKdlYJy8mfZwxyT5m9NyPBXHL+XLjS66l4raO5TlbtskX3bEOoZmPYbgHXsbYYzXKgARu0r7ZM6zgzHdZ+6Z7RqE40T6D1ZOx9pTNYZNH2QWCaf+yq3DYQQ6vxdvogrzoli8nHCbZv1ZSTIvNFMTGl9gsrlnYjtWMcXMhxXoExdd2UibcbvWei2AaNnfIJ69yUnWHmu9CB8MfyZ+V3CufOB89lAH483kgOtlCjmsmEPuCbIO/qcGueYN30SyrU21hBEw5GRERVlfohE5lhGBdYuYz0I3x2NzVpjOxzdwz1Yzz1Zbc8GGrdxwbqntXi8A8nQfUXFp+YkfiEFlfU5jLACsQn+3hLHYL0J/U09Rtc2wimEu+cxH9c+raYXiDK21V6+DDyDpoCwBr5/C9ZQY1TD0d92+fhhEN2jWQD+aKi39bwVRRNLwL7FAN0iyDXFPDHuoU6hNO5wjO3S2AFQh8Hbsg9ru1WbcN47wbPwTbfD0WtLMz//0G3gy8DDLWEmKOdKaRX1Z1SDNC0cjAt/hdXdVH/D0XADmNciTmGOT5NC0zE17A+whH7LMhs0UcQFgIeGNHxfjTgMonuLmDIi+3EKK2/Ir7FNtFqd4Jl2Omstoopdx4iu44A+kEjHTdsMy/fOhZ+o6dZg8UyybtVzRgI/cTpbgzqulA7nDfvunQ2tdwvyqPmS7XA0dQxG5ENo4u1w9NAxHEXadpAteWysQROwFpPAh7KhnghWTVHIWFiWUQOFJ6+AqNUbjuEJr1pqvZu20xwS+LbdfDhiGjNnHsoTYdUmOq3H86j5rKcXtsPRBP72K+hs4OkAcb7uBsfxyNzSHP69KPMHxc/HOMUJJCx8XCcaWc4C0vScYhr3BZRYgQvj6ITOC2E9Cd8A9tTRJ0U8y/SC5NfHjSni/N7be6VIBogCn5yrEgIWEOZLG9LyuidN7z0MorjtRpUivKxA9yR88ybtQ0uLjGlaYHrKhbr0wXgns+LzdYLwAewZ38MY1AXnmLvToqjutd4kKKL7XJMCeMFxj4rW8Bb6wZPwaRsbUVEfW0qpcBKtR70pd5QWBQ0Ac0vCkXJOPW4c2Tskivvb2SoigCyaGR2atN4Sx3arpfp0PqHDTpTea8wVD8I3MWgfOea+T5wqTIToD6ibr7uF0Fhc98V7JzjrGE+CyCISVQJp8h0AfoRB9MAFkOjlA6parlOQ5NZWTR08WDtrqwhIGKedK2fGfDscrRwX6jbtew2QlYvWjnENdqCYMmh+7xbH9/cCz6s5wHr1Ji3fxsLIrbNxm0qBWUSb0jjVq2B7w6doGHfS5Dtw1IymfSdmuu8HyzbRS5SxjpovVmifU1DBGD2FiSCtxWl0hgZvHWpY3CqXSBPl7xmcfsVdjQ+eYeUdRct8rsCoZyZd3tP5Gx8bvfwX9k5JyzlI4fAAAAAASUVORK5CYII=" alt="Customer Experience">
+  <h1><span data-i18n="title1">شكراً</span> <span class="accent" data-i18n="title2">لحضوركم</span></h1>
+  <p data-i18n="intro">سعدنا بمشاركتكم اليوم. رأيكم يساعدنا على تقديم تجربة أفضل في الفعاليات القادمة — لن يستغرق الأمر أكثر من دقيقة.</p>
+</header>
+
+<main>
+  <div class="divider"></div>
+
+  <form id="feedback" novalidate>
+    <div class="section-label" data-i18n="detailsLabel">بياناتك (اختياري)</div>
+    <div class="fields">
+      <div class="field">
+        <label for="name"><span data-i18n="name">الاسم</span> <small data-i18n="optional">(اختياري)</small></label>
+        <input type="text" id="name" name="name" data-i18n-ph="namePh" placeholder="اكتب اسمك" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="empId"><span data-i18n="empId">الرقم الوظيفي</span> <small data-i18n="optional">(اختياري)</small></label>
+        <input type="text" id="empId" name="employee_id" data-i18n-ph="empIdPh" placeholder="مثال: 102345" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="section-label" data-i18n="ratingLabel">التقييم</div>
+
+    <fieldset class="question" data-q="overall">
+      <legend><span class="num">01</span><span data-i18n="q1">ما مدى رضاك عن الفعالية بشكل عام؟</span></legend>
+      <div class="scale" role="radiogroup"></div>
+      <div class="scale-hints"><span data-i18n="q1Low">غير راضٍ</span><span data-i18n="q1High">راضٍ جداً</span></div>
+      <div class="error-msg" data-i18n="required">يرجى اختيار تقييم</div>
+    </fieldset>
+
+    <fieldset class="question" data-q="content">
+      <legend><span class="num">02</span><span data-i18n="q2">ما مدى استفادتك من محتوى الفعالية؟</span></legend>
+      <div class="scale" role="radiogroup"></div>
+      <div class="scale-hints"><span data-i18n="q2Low">محدودة</span><span data-i18n="q2High">كبيرة جداً</span></div>
+      <div class="error-msg" data-i18n="required">يرجى اختيار تقييم</div>
+    </fieldset>
+
+    <fieldset class="question" data-q="organization">
+      <legend><span class="num">03</span><span data-i18n="q3">كيف تقيّم تنظيم الفعالية؟</span></legend>
+      <div class="scale" role="radiogroup"></div>
+      <div class="scale-hints"><span data-i18n="q3Low">ضعيف</span><span data-i18n="q3High">ممتاز</span></div>
+      <div class="error-msg" data-i18n="required">يرجى اختيار تقييم</div>
+    </fieldset>
+
+    <div class="field comment">
+      <label for="comment"><span data-i18n="comment">تعليقات أو اقتراحات</span> <small data-i18n="optional">(اختياري)</small></label>
+      <textarea id="comment" name="comment" data-i18n-ph="commentPh" placeholder="شاركنا ما أعجبك أو ما يمكن تحسينه…"></textarea>
+    </div>
+
+    <button type="submit" class="submit" id="submitBtn" data-i18n="submit">إرسال التقييم</button>
+    <p class="privacy" data-i18n="privacy">تُستخدم إجاباتك لأغراض تحسين الفعاليات فقط.</p>
+  </form>
+</main>
+
+<section class="success" aria-live="polite">
+  <div class="check">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#E2231A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+  </div>
+  <h2 data-i18n="doneTitle">تم استلام تقييمك</h2>
+  <p data-i18n="doneText">شكراً لوقتك ومشاركتك، نتطلع لرؤيتك في فعالياتنا القادمة.</p>
+</section>
+
+<footer class="cx-footer">
+  <div class="cx-footer-content">
+    <div class="cx-footer-ar" dir="rtl">تجربـــــــة العميــــــل تبــــــدأ مــــــــن عنــــــــدك!</div>
+    <div class="cx-footer-en" dir="ltr">Customer Experience Starts with You!</div>
+  </div>
+</footer>
+
+<script>
+  // ضع هنا رابط استقبال الردود (مثل Google Apps Script أو Power Automate). اتركه فارغاً للتجربة.
+  const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbw89E6JQ1z4mcfdAEOd9qpg3KHgFh5Pjd8n_esFkg6lXh7dQogU2RepuAPAeqIbriIw/exec";
+
+  const I18N = {
+    ar: {
+      pageTitle: "تقييم الفعالية",
+      toggle: "English", toggleLabel: "Switch to English",
+      title1: "شكراً", title2: "لحضوركم",
+      intro: "سعدنا بمشاركتكم اليوم. رأيكم يساعدنا على تقديم تجربة أفضل في الفعاليات القادمة — لن يستغرق الأمر أكثر من دقيقة.",
+      detailsLabel: "بياناتك (اختياري)",
+      name: "الاسم", namePh: "اكتب اسمك",
+      empId: "الرقم الوظيفي", empIdPh: "مثال: 102345",
+      optional: "(اختياري)",
+      ratingLabel: "التقييم",
+      q1: "ما مدى رضاك عن الفعالية بشكل عام؟", q1Low: "غير راضٍ", q1High: "راضٍ جداً",
+      q2: "ما مدى استفادتك من محتوى الفعالية؟", q2Low: "محدودة", q2High: "كبيرة جداً",
+      q3: "كيف تقيّم تنظيم الفعالية؟", q3Low: "ضعيف", q3High: "ممتاز",
+      required: "يرجى اختيار تقييم",
+      comment: "تعليقات أو اقتراحات", commentPh: "شاركنا ما أعجبك أو ما يمكن تحسينه…",
+      submit: "إرسال التقييم", sending: "جارٍ الإرسال…",
+      privacy: "تُستخدم إجاباتك لأغراض تحسين الفعاليات فقط.",
+      doneTitle: "تم استلام تقييمك",
+      doneText: "شكراً لوقتك ومشاركتك، نتطلع لرؤيتك في فعالياتنا القادمة.",
+      error: "تعذّر الإرسال، يرجى المحاولة مرة أخرى.",
+      of5: "من 5"
+    },
+    en: {
+      pageTitle: "Event Feedback",
+      toggle: "عربي", toggleLabel: "التبديل إلى العربية",
+      title1: "Thank you", title2: "for joining us",
+      intro: "We were glad to have you today. Your feedback helps us make future events even better — it takes less than a minute.",
+      detailsLabel: "Your details (optional)",
+      name: "Name", namePh: "Enter your name",
+      empId: "Employee ID", empIdPh: "e.g. 102345",
+      optional: "(optional)",
+      ratingLabel: "Your rating",
+      q1: "How satisfied are you with the event overall?", q1Low: "Not satisfied", q1High: "Very satisfied",
+      q2: "How useful was the event content for you?", q2Low: "Slightly", q2High: "Extremely",
+      q3: "How would you rate the event organization?", q3Low: "Poor", q3High: "Excellent",
+      required: "Please select a rating",
+      comment: "Comments or suggestions", commentPh: "Tell us what you liked or what we could improve…",
+      submit: "Submit feedback", sending: "Sending…",
+      privacy: "Your answers are used only to improve our events.",
+      doneTitle: "Feedback received",
+      doneText: "Thank you for your time. We look forward to seeing you at our next events.",
+      error: "Couldn't send your feedback. Please try again.",
+      of5: "of 5"
+    }
+  };
+
+  let lang = "ar";
+
+  function applyLang(next) {
+    lang = next;
+    const t = I18N[lang];
+    const root = document.documentElement;
+    root.lang = lang;
+    root.dir = lang === "ar" ? "rtl" : "ltr";
+    document.title = t.pageTitle;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
+    document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t[el.dataset.i18nPh]; });
+    document.querySelectorAll(".scale label").forEach(l => { l.setAttribute("aria-label", `${l.textContent} ${t.of5}`); });
+
+    const toggle = document.getElementById("langToggle");
+    toggle.querySelector("span").textContent = t.toggle;
+    toggle.setAttribute("aria-label", t.toggleLabel);
+    toggle.lang = lang === "ar" ? "en" : "ar";
+
+    try { localStorage.setItem("feedback-lang", lang); } catch (e) {}
+  }
+
+  // بناء أزرار التقييم 1–5
+  document.querySelectorAll(".question").forEach(q => {
+    const key = q.dataset.q;
+    const scale = q.querySelector(".scale");
+    for (let i = 1; i <= 5; i++) {
+      const id = `${key}-${i}`;
+      scale.insertAdjacentHTML("beforeend",
+        `<input type="radio" name="${key}" id="${id}" value="${i}">` +
+        `<label for="${id}">${i}</label>`);
+    }
+    scale.addEventListener("change", () => q.classList.remove("invalid"));
+  });
+
+  // اللغة الابتدائية: ?lang=en في الرابط، ثم آخر اختيار محفوظ، ثم العربية
+  let initial = new URLSearchParams(location.search).get("lang");
+  if (!I18N[initial]) {
+    try { initial = localStorage.getItem("feedback-lang"); } catch (e) { initial = null; }
+  }
+  applyLang(I18N[initial] ? initial : "ar");
+
+  document.getElementById("langToggle").addEventListener("click", () => {
+    applyLang(lang === "ar" ? "en" : "ar");
+  });
+
+  const form = document.getElementById("feedback");
+  const btn = document.getElementById("submitBtn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let firstInvalid = null;
+    document.querySelectorAll(".question").forEach(q => {
+      const answered = q.querySelector("input:checked");
+      q.classList.toggle("invalid", !answered);
+      if (!answered && !firstInvalid) firstInvalid = q;
+    });
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(form));
+    data.language = lang;
+    data.submitted_at = new Date().toISOString();
+
+    btn.disabled = true;
+    btn.textContent = I18N[lang].sending;
+
+    try {
+      if (SUBMIT_URL) {
+        await fetch(SUBMIT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(data)
+        });
+      } else {
+        console.log("Feedback:", data);
+      }
+      document.body.classList.add("done");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = I18N[lang].submit;
+      alert(I18N[lang].error);
+    }
+  });
+</script>
+</body>
+</html>
