@@ -5,283 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src https://script.google.com https://script.googleusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'; upgrade-insecure-requests">
 <title>Event Feedback | Together We Protect</title>
 <link rel="preload" href="fonts/UniversArabicForHSBC-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="fonts/UniversArabicForHSBC-Bold.ttf" as="font" type="font/ttf" crossorigin>
-<style>
-  /* خط الهوية — Univers: عائلة واحدة "Univers SAB" تختار الحروف العربية أو اللاتينية تلقائياً */
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Light.ttf") format("truetype");
-    font-weight: 300; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Regular.ttf") format("truetype");
-    font-weight: 400 500; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversArabicForHSBC-Bold.ttf") format("truetype");
-    font-weight: 600 800; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Light.otf") format("opentype");
-    font-weight: 300; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Regular.otf") format("opentype");
-    font-weight: 400; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Medium.otf") format("opentype");
-    font-weight: 500 600; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
-  @font-face { font-family: "Univers SAB"; src: url("fonts/UniversNextforHSBC-Bold.otf") format("opentype");
-    font-weight: 700 800; font-display: swap; unicode-range: U+0000-024F, U+2000-206F, U+20AC; }
-
-  :root {
-    --red: #E2231A;
-    --red-dark: #B81B14;
-    --red-tint: #FDECEB;
-    --black: #141414;
-    --gray-700: #4A4A4A;
-    --gray-500: #8A8A8A;
-    --gray-300: #D9D9D9;
-    --gray-100: #F4F4F4;
-    --white: #FFFFFF;
-    --radius: 14px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    font-family: "Univers SAB", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
-    background: var(--white);
-    color: var(--black);
-    line-height: 1.6;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-  }
-
-  body > * { flex-shrink: 0; }
-  main, .success { width: 100%; }
-
-  /* ---------- Header ---------- */
-  .hero {
-    position: relative;
-    padding: 40px 20px 36px;
-    text-align: center;
-    overflow: hidden;
-  }
-  .campaign-banner { display: block; width: 100%; height: auto; max-width: 1440px; margin: 0 auto; }
-  .hero h1 {
-    position: relative;
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin-bottom: 10px;
-  }
-  .hero h1 .accent { color: var(--red); }
-  .hero p {
-    position: relative;
-    color: var(--gray-700);
-    font-size: 1rem;
-    max-width: 340px;
-    margin: 0 auto;
-  }
-
-  /* ---------- Language toggle ---------- */
-  .lang-toggle {
-    position: absolute;
-    top: 16px;
-    inset-inline-end: 16px;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 44px;
-    padding: 0 14px;
-    border: 1.5px solid var(--gray-300);
-    border-radius: 999px;
-    background: rgba(255,255,255,.92);
-    color: var(--black);
-    font: inherit;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: border-color .15s, color .15s;
-  }
-  .lang-toggle:hover { border-color: var(--red); color: var(--red); }
-  .lang-toggle:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
-  .lang-toggle svg { flex: none; }
-  .hero { padding-top: 64px; }
-
-  /* ---------- Form ---------- */
-  main { max-width: 520px; margin: 0 auto; padding: 0 20px 48px; }
-  .divider { height: 1px; background: var(--gray-300); margin: 0 0 32px; }
-
-  .section-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--gray-500);
-    margin-bottom: 14px;
-  }
-
-  .fields { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
-  @media (min-width: 420px) { .fields { grid-template-columns: 1.4fr 1fr; } }
-
-  .field label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--gray-700);
-    margin-bottom: 6px;
-  }
-  .field label small { color: var(--gray-500); font-weight: 400; }
-
-  input[type="text"], textarea {
-    width: 100%;
-    font: inherit;
-    font-size: 1rem; /* 16px avoids iOS zoom */
-    color: var(--black);
-    background: var(--gray-100);
-    border: 1.5px solid transparent;
-    border-radius: var(--radius);
-    padding: 13px 14px;
-    transition: border-color .15s, background .15s;
-    -webkit-appearance: none;
-  }
-  input[type="text"]::placeholder, textarea::placeholder { color: var(--gray-500); }
-  input[type="text"]:focus, textarea:focus {
-    outline: none;
-    background: var(--white);
-    border-color: var(--black);
-  }
-  textarea { resize: vertical; min-height: 112px; }
-
-  .question { margin-bottom: 32px; }
-  .question legend {
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-  .question legend .num {
-    flex: none;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--red);
-  }
-  fieldset { border: 0; }
-
-  .scale {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-  }
-  .scale input { position: absolute; opacity: 0; pointer-events: none; }
-  .scale label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 52px;
-    border-radius: 12px;
-    border: 1.5px solid var(--gray-300);
-    background: var(--white);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--gray-700);
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    transition: background .15s, border-color .15s, color .15s, transform .1s;
-  }
-  .scale label:active { transform: scale(.95); }
-  .scale input:focus-visible + label { outline: 2px solid var(--black); outline-offset: 2px; }
-  .scale input:checked + label {
-    background: var(--red);
-    border-color: var(--red);
-    color: var(--white);
-  }
-  .scale-hints {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-    font-size: 0.75rem;
-    color: var(--gray-500);
-  }
-  .question.invalid .scale label { border-color: var(--red); }
-  .error-msg {
-    display: none;
-    margin-top: 8px;
-    font-size: 0.8rem;
-    color: var(--red);
-    font-weight: 500;
-  }
-  .question.invalid .error-msg { display: block; }
-
-  .comment { margin: 8px 0 32px; }
-
-  .submit {
-    width: 100%;
-    height: 56px;
-    border: 0;
-    border-radius: var(--radius);
-    background: var(--red);
-    color: var(--white);
-    font: inherit;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background .15s, transform .1s;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .submit:hover { background: var(--red-dark); }
-  .submit:active { transform: scale(.98); }
-  .submit:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
-  .submit[disabled] { background: var(--gray-500); cursor: default; }
-
-  .privacy {
-    text-align: center;
-    margin-top: 14px;
-    font-size: 0.78rem;
-    color: var(--gray-500);
-  }
-
-  /* ---------- Success ---------- */
-  .success {
-    display: none;
-    text-align: center;
-    padding: 24px 20px 64px;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-  .success .check {
-    width: 76px; height: 76px;
-    margin: 0 auto 24px;
-    border-radius: 50%;
-    background: var(--red-tint);
-    display: grid; place-items: center;
-  }
-  .success h2 { font-size: 1.5rem; margin-bottom: 8px; }
-  .success p { color: var(--gray-700); }
-  body.done main { display: none; }
-  body.done .success { display: block; animation: rise .4s ease both; }
-  body.done .hero h1, body.done .hero p { display: none; }
-  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-
-.campaign-footer { margin-top: auto; position: relative; padding-top: 12px; text-align: center; overflow: hidden; }
-.campaign-footer p { padding: 0 20px; color: var(--gray-700); font-weight: 600; }
-.campaign-pattern { display: block; width: 100%; max-width: 1235px; height: auto; margin: 18px auto 0; }
-
-  /* Gentle feedback for touch, pointer and keyboard interaction. */
-  input[type="text"], textarea { transition: border-color .18s ease, background .18s ease, box-shadow .18s ease; }
-  input[type="text"]:focus, textarea:focus { border-color: var(--red); box-shadow: 0 0 0 4px rgba(226,35,26,.09); }
-  .scale label { transition: background .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; }
-  .scale input:checked + label { box-shadow: 0 4px 12px rgba(226,35,26,.2); }
-  .submit { background: linear-gradient(135deg, var(--red), #c91b14); box-shadow: 0 6px 18px rgba(226,35,26,.16); transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
-  .submit:disabled { box-shadow: none; }
-  @media (hover: hover) {
-    .scale label:hover { border-color: var(--red); transform: translateY(-2px); }
-    .submit:not(:disabled):hover { box-shadow: 0 8px 22px rgba(226,35,26,.24); transform: translateY(-1px); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  }
-</style>
+<link rel="stylesheet" href="feedback.css?v=kiosk1">
+<script src="feedback.js?v=kiosk1" defer></script>
 </head>
 <body>
+<section id="welcome" class="welcome" aria-label="Welcome — مرحباً" hidden>
+  <img class="welcome-banner" src="Banner%404x.png?v=dc30a03" width="4649" height="1562" alt="Together We Protect — Cybersecurity and Fraud Risk">
+  <div class="welcome-content">
+    <p class="eyebrow">YOUR VOICE MAKES A DIFFERENCE</p>
+    <h1>Before you go,<br><span>tell us what you think.</span></h1>
+    <p class="welcome-ar" lang="ar" dir="rtl">قبل ما تمشي… رأيك يهمنا</p>
+    <div class="qr-card">
+      <p class="qr-title">Scan. Rate. You’re done.</p>
+      <p lang="ar" dir="rtl">امسح الرمز وقيّم الفعالية من هاتفك</p>
+      <img src="feedback-qr.svg" width="360" height="360" alt="QR code: https://thetechhup-dot.github.io/Together-We-Protect/" class="welcome-qr">
+      <p class="qr-caption">3 quick ratings · Less than a minute</p>
+      <p class="qr-caption" lang="ar" dir="rtl">٣ تقييمات سريعة · أقل من دقيقة</p>
+    </div>
+    <div class="touch-option">
+      <p>No phone? You can use this screen.</p>
+      <p lang="ar" dir="rtl">ما معك هاتف؟ تقدر تقيّم من هنا</p>
+      <button type="button" id="startKiosk" class="touch-start">Tap to rate here <span lang="ar" dir="rtl">المس للتقييم هنا</span><span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+  <img class="welcome-pattern" src="Patren%404x.png" alt="" aria-hidden="true">
+</section>
+<nav class="kiosk-nav kiosk-only" aria-label="Screen controls"><button type="button" id="backWelcome" data-i18n="backHome">Back to welcome</button></nav>
 
 <img class="campaign-banner" src="Banner%404x.png?v=dc30a03" width="4649" height="1562" fetchpriority="high" alt="Together We Protect — Cybersecurity and Fraud Risk (CFR) — إدارة الأمن السيبراني والاحتيال">
 
@@ -296,25 +50,30 @@
   <p data-i18n="intro">We were glad to have you today. Your feedback helps us make future events even better — it takes less than a minute.</p>
 </header>
 
+<aside class="phone-panel" aria-label="Rate on your phone">
+  <img src="feedback-qr.svg" width="136" height="136" alt="Scan to open the feedback form on your phone">
+  <div><h2 data-i18n="scanTitle">Prefer your phone?</h2><p data-i18n="scanText">Scan to share your feedback on your own device.</p></div>
+</aside>
 <main>
   <div class="divider"></div>
 
-  <form id="feedback" novalidate>
+  <form id="feedback" novalidate autocomplete="off">
+    <p class="kiosk-only shared-note" data-i18n="privateNote"></p>
     <div class="section-label" data-i18n="detailsLabel">Your details</div>
     <div class="fields">
       <div class="field">
         <label for="name"><span data-i18n="name">Name</span></label>
-        <input type="text" id="name" name="name" data-i18n-ph="namePh" placeholder="Enter your name" autocomplete="name">
+        <input type="text" id="name" name="name" data-i18n-ph="namePh" placeholder="Enter your name" autocomplete="off" maxlength="100">
       </div>
       <div class="field">
         <label for="empId"><span data-i18n="empId">Employee ID</span></label>
-        <input type="text" id="empId" name="employee_id" data-i18n-ph="empIdPh" placeholder="e.g. 102345" inputmode="numeric">
+        <input type="text" id="empId" name="employee_id" data-i18n-ph="empIdPh" placeholder="e.g. 102345" inputmode="numeric" autocomplete="off" maxlength="40">
       </div>
     </div>
 
     <div class="field comment">
       <label for="comment"><span data-i18n="comment">Comments or suggestions</span></label>
-      <textarea id="comment" name="comment" data-i18n-ph="commentPh" placeholder="Tell us what you liked or what we could improve…"></textarea>
+      <textarea maxlength="2000" autocomplete="off" id="comment" name="comment" data-i18n-ph="commentPh" placeholder="Tell us what you liked or what we could improve…"></textarea>
     </div>
 
     <div class="section-label" data-i18n="ratingLabel">Your rating</div>
@@ -340,6 +99,7 @@
       <div class="error-msg" data-i18n="required">Please select a rating</div>
     </fieldset>
 
+    <p id="sendError" class="send-error" role="alert" hidden></p>
     <button type="submit" class="submit" id="submitBtn" data-i18n="submit">Submit feedback</button>
     <p class="privacy" data-i18n="privacy">Your answers are used only to improve our events.</p>
   </form>
@@ -351,152 +111,23 @@
   </div>
   <h2 data-i18n="doneTitle">Feedback received</h2>
   <p data-i18n="doneText">Thank you for your time. We look forward to seeing you at our next events.</p>
+  <p class="kiosk-only return-note" data-i18n="returnNote"></p>
+  <button type="button" class="kiosk-only clear-button" id="finishKiosk" data-i18n="finishSession"></button>
 </section>
 
+<dialog id="idleDialog" aria-labelledby="idleTitle">
+  <h2 id="idleTitle" data-i18n="idleTitle"></h2>
+  <p data-i18n="idleText"></p>
+  <p id="idleCountdown" aria-live="off"></p>
+  <button type="button" id="continueKiosk" class="touch-start" data-i18n="continueSession"></button>
+  <button type="button" id="clearKiosk" class="clear-button" data-i18n="finishSession"></button>
+</dialog>
+<noscript><p class="no-script">Please enable JavaScript to submit feedback. / يرجى تفعيل JavaScript لإرسال التقييم.</p></noscript>
 <footer class="campaign-footer">
   <p data-i18n="campaignFooter">Together We Protect</p>
   <img class="campaign-pattern" src="Patren%404x.png" width="1235" height="348" alt="" aria-hidden="true">
 </footer>
 
-<script>
-  // ضع هنا رابط استقبال الردود (مثل Google Apps Script أو Power Automate). اتركه فارغاً للتجربة.
-  const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbw89E6JQ1z4mcfdAEOd9qpg3KHgFh5Pjd8n_esFkg6lXh7dQogU2RepuAPAeqIbriIw/exec";
 
-  const I18N = {
-    ar: {
-      pageTitle: "تقييم الفعالية | معاً نحمي",
-      campaignFooter: "معاً نحمي",
-      toggle: "English", toggleLabel: "Switch to English",
-      title1: "شكراً", title2: "لحضوركم",
-      intro: "سعدنا بمشاركتكم اليوم. رأيكم يساعدنا على تقديم تجربة أفضل في الفعاليات القادمة — لن يستغرق الأمر أكثر من دقيقة.",
-      detailsLabel: "بياناتك",
-      name: "الاسم", namePh: "اكتب اسمك",
-      empId: "الرقم الوظيفي", empIdPh: "مثال: 102345",
-      ratingLabel: "التقييم",
-      q1: "ما مدى رضاك عن الفعالية بشكل عام؟", q1Low: "غير راضٍ", q1High: "راضٍ جداً",
-      q2: "ما مدى استفادتك من محتوى الفعالية؟", q2Low: "محدودة", q2High: "كبيرة جداً",
-      q3: "كيف تقيّم تنظيم الفعالية؟", q3Low: "ضعيف", q3High: "ممتاز",
-      required: "يرجى اختيار تقييم",
-      comment: "تعليقات أو اقتراحات", commentPh: "شاركنا ما أعجبك أو ما يمكن تحسينه…",
-      submit: "إرسال التقييم", sending: "جارٍ الإرسال…",
-      privacy: "تُستخدم إجاباتك لأغراض تحسين الفعاليات فقط.",
-      doneTitle: "تم استلام تقييمك",
-      doneText: "شكراً لوقتك ومشاركتك، نتطلع لرؤيتك في فعالياتنا القادمة.",
-      error: "تعذّر الإرسال، يرجى المحاولة مرة أخرى.",
-      of5: "من 5"
-    },
-    en: {
-      pageTitle: "Event Feedback | Together We Protect",
-      campaignFooter: "Together We Protect",
-      toggle: "عربي", toggleLabel: "التبديل إلى العربية",
-      title1: "Thank you", title2: "for joining us",
-      intro: "We were glad to have you today. Your feedback helps us make future events even better — it takes less than a minute.",
-      detailsLabel: "Your details",
-      name: "Name", namePh: "Enter your name",
-      empId: "Employee ID", empIdPh: "e.g. 102345",
-      ratingLabel: "Your rating",
-      q1: "How satisfied are you with the event overall?", q1Low: "Not satisfied", q1High: "Very satisfied",
-      q2: "How useful was the event content for you?", q2Low: "Slightly", q2High: "Extremely",
-      q3: "How would you rate the event organization?", q3Low: "Poor", q3High: "Excellent",
-      required: "Please select a rating",
-      comment: "Comments or suggestions", commentPh: "Tell us what you liked or what we could improve…",
-      submit: "Submit feedback", sending: "Sending…",
-      privacy: "Your answers are used only to improve our events.",
-      doneTitle: "Feedback received",
-      doneText: "Thank you for your time. We look forward to seeing you at our next events.",
-      error: "Couldn't send your feedback. Please try again.",
-      of5: "of 5"
-    }
-  };
-
-  let lang = "en";
-
-  function applyLang(next) {
-    lang = next;
-    const t = I18N[lang];
-    const root = document.documentElement;
-    root.lang = lang;
-    root.dir = lang === "ar" ? "rtl" : "ltr";
-    document.title = t.pageTitle;
-
-    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
-    document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t[el.dataset.i18nPh]; });
-    document.querySelectorAll(".scale label").forEach(l => { l.setAttribute("aria-label", `${l.textContent} ${t.of5}`); });
-
-    const toggle = document.getElementById("langToggle");
-    toggle.querySelector("span").textContent = t.toggle;
-    toggle.setAttribute("aria-label", t.toggleLabel);
-    toggle.lang = lang === "ar" ? "en" : "ar";
-
-    const submitButton = document.getElementById("submitBtn");
-    if (submitButton.disabled) submitButton.textContent = t.sending;
-  }
-
-  // بناء أزرار التقييم 1–5
-  document.querySelectorAll(".question").forEach(q => {
-    const key = q.dataset.q;
-    const scale = q.querySelector(".scale");
-    for (let i = 1; i <= 5; i++) {
-      const id = `${key}-${i}`;
-      scale.insertAdjacentHTML("beforeend",
-        `<input type="radio" name="${key}" id="${id}" value="${i}">` +
-        `<label for="${id}">${i}</label>`);
-    }
-    scale.addEventListener("change", () => q.classList.remove("invalid"));
-  });
-
-  // Default to English on every visit; an explicit ?lang=ar link opens Arabic.
-  const initial = new URLSearchParams(location.search).get("lang");
-  applyLang(I18N[initial] ? initial : "en");
-
-  document.getElementById("langToggle").addEventListener("click", () => {
-    applyLang(lang === "ar" ? "en" : "ar");
-  });
-
-  const form = document.getElementById("feedback");
-  const btn = document.getElementById("submitBtn");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    let firstInvalid = null;
-    document.querySelectorAll(".question").forEach(q => {
-      const answered = q.querySelector("input:checked");
-      q.classList.toggle("invalid", !answered);
-      if (!answered && !firstInvalid) firstInvalid = q;
-    });
-    if (firstInvalid) {
-      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
-    }
-
-    const data = Object.fromEntries(new FormData(form));
-    data.language = lang;
-    data.campaign = "Cybersecurity";
-    data.submitted_at = new Date().toISOString();
-
-    btn.disabled = true;
-    btn.textContent = I18N[lang].sending;
-
-    try {
-      if (SUBMIT_URL) {
-        await fetch(SUBMIT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(data)
-        });
-      } else {
-        console.log("Feedback:", data);
-      }
-      document.body.classList.add("done");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = I18N[lang].submit;
-      alert(I18N[lang].error);
-    }
-  });
-</script>
 </body>
 </html>
