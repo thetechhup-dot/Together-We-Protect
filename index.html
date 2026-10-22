@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
-<title>تقييم الفعالية</title>
+<title>تقييم الفعالية | معاً نحمي</title>
 <link rel="preload" href="fonts/UniversArabicForHSBC-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preload" href="fonts/UniversArabicForHSBC-Bold.ttf" as="font" type="font/ttf" crossorigin>
 <style>
@@ -56,16 +56,15 @@
     overflow: hidden;
   }
   .deco { position: absolute; pointer-events: none; }
-  .deco-pill  { top: -70px; left: -40px; width: 120px; }
-  .deco-rings { top: 18px; right: -34px; width: 96px; }
-  .deco-small { top: 120px; left: 18px; width: 34px; }
+  .deco-circuit { top: 0; right: 0; width: clamp(150px, 28vw, 340px); height: auto; opacity: .16; }
+  .campaign-name { position: relative; display: block; width: 440px; max-width: 100%; height: auto; margin: 0 auto 28px; }
   .logo {
     position: relative;
     display: block;
     width: 190px;
     max-width: 60%;
     height: auto;
-    margin: 0 auto 36px;
+    margin: 0 auto 20px;
   }
   .hero h1 {
     position: relative;
@@ -266,81 +265,23 @@
   body.done .hero h1, body.done .hero p { display: none; }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-.cx-footer {
-  padding: 22px 20px 28px;
-  text-align: center;
-}
-
-.cx-footer-content {
-  display: inline-block;
-  text-align: left;
-  font-family: inherit;
-  line-height: 1.15;
-}
-
-.cx-footer-ar {
-  font-family: inherit;
-  font-size: 1.45rem;
-  font-weight: 400;
-  color: #231F20;
-  text-align: left;
-  margin-bottom: 4px;
-  white-space: nowrap;
-}
-
-.cx-footer-en {
-  font-family: inherit;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--red);
-  text-align: left;
-  white-space: nowrap;
-}
-
-@media (max-width: 520px) {
-  .cx-footer-ar {
-    font-size: 1.15rem;
-  }
-
-  .cx-footer-en {
-    font-size: 1rem;
-  }
-}
-  }
+.campaign-footer { position: relative; padding-top: 12px; text-align: center; overflow: hidden; }
+.campaign-footer p { padding: 0 20px; color: var(--gray-700); font-weight: 600; }
+.campaign-pattern { display: block; width: 100%; max-width: 1235px; height: auto; margin: 18px auto 0; }
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <!-- عناصر زخرفية مستوحاة من الهوية (أحمر ورمادي فقط) -->
-  <svg class="deco deco-pill" viewBox="0 0 120 220" fill="none" aria-hidden="true">
-    <g stroke="#E2231A" stroke-width="2" opacity=".9">
-      <rect x="2"  y="2"  width="116" height="216" rx="58"/>
-      <rect x="10" y="10" width="100" height="200" rx="50"/>
-      <rect x="18" y="18" width="84"  height="184" rx="42"/>
-      <rect x="26" y="26" width="68"  height="168" rx="34"/>
-    </g>
-  </svg>
-  <svg class="deco deco-rings" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-    <g stroke="#8A8A8A" stroke-width="1">
-      <circle cx="50" cy="50" r="48"/><circle cx="50" cy="50" r="40"/>
-      <circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="24"/>
-      <circle cx="50" cy="50" r="16"/><circle cx="50" cy="50" r="8"/>
-    </g>
-  </svg>
-  <svg class="deco deco-small" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-    <g stroke="#E2231A" stroke-width="1">
-      <circle cx="20" cy="20" r="19"/><circle cx="20" cy="20" r="14"/>
-      <circle cx="20" cy="20" r="9"/><circle cx="20" cy="20" r="4"/>
-    </g>
-  </svg>
+  <img class="deco deco-circuit" src="patren%202%404x.png" alt="" aria-hidden="true">
 
   <button type="button" class="lang-toggle" id="langToggle" lang="en" aria-label="Switch to English">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 3.9 6 3.9 9.5S14.6 18.7 12 21.5M12 2.5C9.4 5.3 8.1 8.5 8.1 12s1.3 6.7 3.9 9.5"/></svg>
     <span>English</span>
   </button>
 
-  <img class="logo" src="data:image/png;base64,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" alt="Customer Experience">
+  <img class="logo" src="logo.png" width="526" height="476" alt="Together We Protect">
+  <img class="campaign-name" src="Event%20Name%404x.png" width="894" height="126" alt="شهر التوعية بالأمن السيبراني والاحتيال — Cybersecurity and Fraud Awareness Month">
   <h1><span data-i18n="title1">شكراً</span> <span class="accent" data-i18n="title2">لحضوركم</span></h1>
   <p data-i18n="intro">سعدنا بمشاركتكم اليوم. رأيكم يساعدنا على تقديم تجربة أفضل في الفعاليات القادمة — لن يستغرق الأمر أكثر من دقيقة.</p>
 </header>
@@ -402,11 +343,9 @@
   <p data-i18n="doneText">شكراً لوقتك ومشاركتك، نتطلع لرؤيتك في فعالياتنا القادمة.</p>
 </section>
 
-<footer class="cx-footer">
-  <div class="cx-footer-content">
-    <div class="cx-footer-ar" dir="rtl">تجربـــــــة العميــــــل تبــــــدأ مــــــــن عنــــــــدك!</div>
-    <div class="cx-footer-en" dir="ltr">Customer Experience Starts with You!</div>
-  </div>
+<footer class="campaign-footer">
+  <p data-i18n="campaignFooter">معاً نحمي</p>
+  <img class="campaign-pattern" src="Patren%404x.png" width="1235" height="348" alt="" aria-hidden="true">
 </footer>
 
 <script>
@@ -415,7 +354,8 @@
 
   const I18N = {
     ar: {
-      pageTitle: "تقييم الفعالية",
+      pageTitle: "تقييم الفعالية | معاً نحمي",
+      campaignFooter: "معاً نحمي",
       toggle: "English", toggleLabel: "Switch to English",
       title1: "شكراً", title2: "لحضوركم",
       intro: "سعدنا بمشاركتكم اليوم. رأيكم يساعدنا على تقديم تجربة أفضل في الفعاليات القادمة — لن يستغرق الأمر أكثر من دقيقة.",
@@ -437,7 +377,8 @@
       of5: "من 5"
     },
     en: {
-      pageTitle: "Event Feedback",
+      pageTitle: "Event Feedback | Together We Protect",
+      campaignFooter: "Together We Protect",
       toggle: "عربي", toggleLabel: "التبديل إلى العربية",
       title1: "Thank you", title2: "for joining us",
       intro: "We were glad to have you today. Your feedback helps us make future events even better — it takes less than a minute.",
@@ -525,6 +466,7 @@
 
     const data = Object.fromEntries(new FormData(form));
     data.language = lang;
+    data.campaign = "Cybersecurity";
     data.submitted_at = new Date().toISOString();
 
     btn.disabled = true;
